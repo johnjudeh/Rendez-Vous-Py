@@ -49,7 +49,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'RendezVous.urls'
+ROOT_URLCONF = 'rendezvous.urls'
 
 TEMPLATES = [
     {
@@ -67,7 +67,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'RendezVous.wsgi.application'
+WSGI_APPLICATION = 'rendezvous.wsgi.application'
 
 
 # Database
