@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang='en-GB'>
+<head>
+    <title>Rendez Vous</title>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name='description' content='Rendez Vous connects friends in big cities,
+        finding the fun and fairly-located places to spend time. Hang out spots
+        are chosen based on the group&apos;s shared interests.'>
+    <link rel='shortcut icon' href='{% static "mapper/imgs/favicon.png" %}' type='image/x-icon'>
+    <link rel='manifest' href='{% static "mapper/manifest.json" %}'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css'>
+    <link rel='stylesheet' href='{% static "mapper/css/app.css" %}'>
+    <link href='https://fonts.googleapis.com/css?family=Oleo+Script+Swash+Caps|Roboto' rel='stylesheet'>
+    <script
+            src='https://code.jquery.com/jquery-3.2.1.min.js'
+            integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4='
+            crossorigin='anonymous'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.js'></script>
+</head>
+{% block body_opening_tag %}
+<body>
+{% endblock body_opening_tag %}
+
+    <nav class='ui inverted menu nav'>
+        <div class='ui container'>
+            <header class='header item'>
+                <a data-href='{% url "mapper:index" %}'><i class='cube icon logo'></i></a>
+                <p class='logo__text'>Rendez Vous</p>
+            </header>
+            {% if not currentUser %}
+            <div class='right menu'>
+                <!-- TODO: Update sw.js when you update this -->
+                <a class='item menu__register' data-href='/register'>Sign Up</a>
+                <a class='item menu__login' data-href='/login'>Login</a>
+                <a class='item menu__register-icon' data-href='/register'><i class='add user icon'></i></a>
+                <a class='item menu__login-icon' data-href='/login'><i class='sign in icon'></i></a>
+            </div>
+            {% else %}
+            <div class='right menu'>
+                <a class='item'>
+                    <span class='menu__signed-in-as'>Signed in as: </span>
+                    <span class='menu__user menu__user--lg'>{{ currentUser.firstName }} {{ currentUser.lastName }}</span>
+                    <span class='menu__user menu__user--sm'>{{ currentUser.firstName }}</span>
+                </a>
+                <a class='item menu__logout' data-href='/logout'>Logout</a>
+                <a class='item menu__logout-icon' data-href='/logout'><i class='sign out icon'></i></a>
+            </div>
+            {% endif %}
+        </div>
+    </nav>
+
+    {% block main_content %}{% endblock main_content %}
+
+    <div class='ui black message hidden' id='toastDiv'>
+        <p class='toastMessage'>New version available</p>
+        <button class='toastButton' id='swRefresh'>Refresh</button>
+        <button class='toastButton' id='swDismiss'>Dismiss</button>
+    </div>
+
+    {% block scripts %}{% endblock scripts %}
+
+</body>
+</html>
