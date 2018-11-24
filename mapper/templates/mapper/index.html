@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang='en-GB'>
+<head>
+    <title>Rendez Vous</title>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name='description' content='Rendez Vous connects friends in big cities,
+        finding the fun and fairly-located places to spend time. Hang out spots
+        are chosen based on the group&apos;s shared interests.'>
+    <link rel='shortcut icon' href='imgs/favicon.png' type='image/x-icon'>
+    <link rel='manifest' href='/manifest.json'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css'>
+    <link rel='stylesheet' href='/css/app.css'>
+    <link href='https://fonts.googleapis.com/css?family=Oleo+Script+Swash+Caps|Roboto' rel='stylesheet'>
+    <script
+            src='https://code.jquery.com/jquery-3.2.1.min.js'
+            integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4='
+            crossorigin='anonymous'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.js'></script>
+</head>
+<body class='fullscreen-body'>
+
+    <!-- Partial: Nav -->
+    <nav class='ui inverted menu nav'>
+        <div class='ui container'>
+            <header class='header item'>
+                <a data-href='/'><i class='cube icon logo'></i></a>
+                <p class='logo__text'>Rendez Vous</p>
+            </header>
+            {% if not currentUser %}
+            <div class='right menu'>
+                <a class='item menu__register' data-href='/register'>Sign Up</a>
+                <a class='item menu__login' data-href='/login'>Login</a>
+                <a class='item menu__register-icon' data-href='/register'><i class='add user icon'></i></a>
+                <a class='item menu__login-icon' data-href='/login'><i class='sign in icon'></i></a>
+            </div>
+            {% else %}
+            <div class='right menu'>
+                <a class='item'>
+                    <span class='menu__signed-in-as'>Signed in as: </span>
+                    <span class='menu__user menu__user--lg'>{{ currentUser.firstName }} {{ currentUser.lastName }}</span>
+                    <span class='menu__user menu__user--sm'>{{ currentUser.firstName }}</span>
+                </a>
+                <a class='item menu__logout' data-href='/logout'>Logout</a>
+                <a class='item menu__logout-icon' data-href='/logout'><i class='sign out icon'></i></i></a>
+            </div>
+            {% endif %}
+        </div>
+    </nav>
+
+
+    <main class='main'>
+        <section class='map'>
+            <div id='map' class='map__container'></div>
+        </section>
+
+        <section class='locations'>
+            <i class="angle left icon"></i>
+
+            <header class='ui horizontal divider maps'>
+                Friend Finder
+            </header>
+
+            <article class='ui buttons locator' id='locator'>
+                <button class='ui teal button geo locateButton'>
+                    <i class='marker icon'></i><span class='locateButton__text'>Locate Me</span>
+                </button>
+
+                <div class='ui or'></div>
+
+                <button class='ui grey button search'>
+                    <i class="search icon"></i>
+                    <span class='search__text'>Search</span>
+                </button>
+            </article>
+
+            <article class='ui input icon focus locator hidden' id='search'>
+                <input id='autocomplete' type='text' placeholder='Where are you?'>
+                <i class='repeat disabled icon' id='reloadMap'></i>
+            </article>
+
+            <section class='locator-parent'>
+                <article class='ui card locator friend-holder hidden' id='clone'>
+                    <div class='content'>
+                        <img class='ui avatar image' src='/avatars/female.png'>
+                        <div class='ui container address-div'>
+                            <p class='address'></p>
+                        </div>
+                    </div>
+                </article>
+            </section>
+
+            <article class='fun-finder-sec hidden' id='fun-finder-div'>
+                <button class='ui button fun-finder-sec__fun-btn'>
+                    <span class='fun-finder__text'>Find me fun</span>
+                    <i class="child icon fun-finder__icon"></i>
+                </button>
+            </article>
+
+        </section>
+    </main>
+
+    <!-- Used for infoWindow displaying  -->
+    <div style='display: none'>
+        <div id='info-content'>
+            <table>
+                <tr id='iw-url-row' class='iw_table_row'>
+                    <td id='iw-icon' class='iw_table_icon'></td>
+                    <td id='iw-url'></td>
+                </tr>
+                <tr id='iw-address-row' class='iw_table_row'>
+                    <td class='iw_attribute_name'>Address:</td>
+                    <td id='iw-address'></td>
+                </tr>
+                <tr id='iw-phone-row' class='iw_table_row'>
+                    <td class='iw_attribute_name'>Telephone:</td>
+                    <td id='iw-phone'></td>
+                </tr>
+                <tr id='iw-rating-row' class='iw_table_row'>
+                    <td class='iw_attribute_name'>Rating:</td>
+                    <td id='iw-rating'></td>
+                </tr>
+                <tr id='iw-website-row' class='iw_table_row'>
+                    <td class='iw_attribute_name'>Website:</td>
+                    <td id='iw-website'></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Partial: Toasts -->
+    <div class='ui black message hidden' id='toastDiv'>
+        <p class='toastMessage'>New version available</p>
+        <button class='toastButton' id='swRefresh'>Refresh</button>
+        <button class='toastButton' id='swDismiss'>Dismiss</button>
+    </div>
+
+    {% if currentUser %}
+    <script type='text/javascript' src='/js/maps.js'
+            data-user-interests='{{ JSON.stringify(Object.keys(currentUser.interests)) }}' id='mapScript'></script>
+    {% else %}
+    <script type='text/javascript' src='/js/maps.js' data-user-interests='' id='mapScript'></script>
+    {% endif %}
+
+    <script src='https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js'></script>
+    <script async defer
+            src='https://maps.googleapis.com/maps/api/js?key={{ MAPS_KEY }}&libraries=places&callback=initMap'>
+    </script>
+
+    <!-- Partial: Footer -->
+    <script src='/js/sw/index.js'></script>
+    <script src='/js/manup.min.js'></script>
+    <script src='/js/pwa-nav.js'></script>
+</body>
+</html>
