@@ -72,7 +72,7 @@ class MapController {
     this.FH_TIMEOUT = 700;
     this.CENTER_TIMEOUT = 2300;
     this.ERROR_TIMEOUT = 2500;
-    this.SPY_SRC = '/avatars/ninja.png';
+    this.SPY_SRC = 'static/mapper/avatars/ninja.png';
     this.LONDON_CENTER = {lat: 51.505, lng: -0.123};
     this.FUN_PLACE_CATEGORIES = [ 'Attractions', 'Out & About', 'Adventure', 'Night Life',
                                   'Smarts & Arts', 'Wellness'

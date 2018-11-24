@@ -7,7 +7,7 @@ class ServiceWorker {
     if (!navigator.serviceWorker) return;
     const serviceWorker = this;
 
-    navigator.serviceWorker.register('/sw.js').then(reg => {
+    navigator.serviceWorker.register('/static/mapper/sw.js').then(reg => {
       if (!navigator.serviceWorker.controller) {
         return;
       }
