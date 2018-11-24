@@ -3,4 +3,4 @@ from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
-    return HttpResponse('This is the maps page!')
+    return render(request, 'mapper/index.html')

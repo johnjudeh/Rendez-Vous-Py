@@ -137,7 +137,8 @@
 
     {% if currentUser %}
     <script type='text/javascript' src='/js/maps.js'
-            data-user-interests='{{ JSON.stringify(Object.keys(currentUser.interests)) }}' id='mapScript'></script>
+            data-user-interests='' id='mapScript'></script>
+    <!--data-user-interests='<%= JSON.stringify(Object.keys(currentUser.interests)) %>'-->
     {% else %}
     <script type='text/javascript' src='/js/maps.js' data-user-interests='' id='mapScript'></script>
     {% endif %}
