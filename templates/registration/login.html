@@ -3,7 +3,17 @@
 {% block main_content %}
 <main class='main-forms main-forms--login'>
 
-    <!--TODO: Add toast messages here-->
+    <!--TODO: Find out what this is for-->
+    {% if next %}
+        {% if user.is_authenticated %}
+        <p>Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.</p>
+        {% else %}
+        <p>Please login to see this page.</p>
+        {% endif %}
+    {% endif %}
+
+    <!--TODO: Check toast messages were added properly-->
     <!--<% if (error && error.length > 0) { %>-->
     <!--<form class='ui error form' action='/login' method='post'>-->
     <!--<% } else if (success && success.length > 0) { %>-->
@@ -12,35 +22,52 @@
     <!--<form class='ui form' action='/login' method='post'>-->
     <!--<% } %>-->
 
-    <form class='ui form' action='/login' method='post'>
-        <!--TODO: Add toast messages here-->
-        <!--<div class='ui error message'>-->
-            <!--<header class='header'>We had some issues</header>-->
-            <!--<p> <%= error %> </p>-->
-        <!--</div>-->
+    {% if form.errors %}
+    <form class='ui form error' action='{% url "login" %}' method='post'>
+    {% else %}
+    <form class='ui form' action='{% url "login" %}' method='post'>
+    {% endif %}
 
+        <div class='ui error message'>
+            <header class='header'>We had some issues</header>
+            <p> {{ form.errors }} </p>
+        </div>
+
+        <!--TODO: Check if you need a success toast message here-->
         <!--<div class='ui success message'>-->
             <!--<header class='header'>Hoorah!</header>-->
             <!--<p> <%= success %> Please sign in below. </p>-->
         <!--</div>-->
 
+        {% csrf_token %}
+
         <section>
             <div class='field'>
-                <label>Email</label>
-                <input type='text' name='username' placeholder='john.doe@lostmail.com' autocomplete='email'>
+                {{ form.username.label_tag }}
+                {{ form.username }}
+                <!--<label>Email</label>-->
+                <!--<input type='text' name='username' placeholder='john.doe@lostmail.com' autocomplete='email'>-->
             </div>
 
             <div class='field'>
-                <label>Password</label>
-                <input type='password' name='password' placeholder='********' autocomplete='current-password'>
+                {{ form.password.label_tag }}
+                {{ form.password }}
+                <!--<label>Password</label>-->
+                <!--<input type='password' name='password' placeholder='********' autocomplete='current-password'>-->
             </div>
         </section>
 
         <section class='form-buttons'>
-            <a class='ui grey button form-buttons__button' data-href='/'>Go Back</a>
-            <button class='ui teal button form-buttons__button'>Submit</button>
+            <a class='ui grey button form-buttons__button' data-href='{% url "mapper:index" %}'>Go Back</a>
+            <!--<button class='ui teal button form-buttons__button'>Submit</button>-->
+            <input type="submit" value="login">
+            <!--TODO: Find out what this is for-->
+            <input type="hidden" name="next" value="{{ next }}">
         </section>
     </form>
+
+    <!--TODO: Come back to this and style it properly-->
+    <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
 
 </main>
 {% endblock main_content %}
