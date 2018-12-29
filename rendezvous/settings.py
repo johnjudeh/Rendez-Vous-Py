@@ -131,3 +131,4 @@ STATIC_URL = '/static/'
 # Authentication
 
 LOGIN_REDIRECT_URL = 'mapper:index'
+LOGOUT_REDIRECT_URL = 'mapper:index'
