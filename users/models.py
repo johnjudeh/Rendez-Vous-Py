@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import models as auth_models
 from .constants.interests import INTEREST_CATEGORY_CHOICES, INTEREST_TYPE_CHOICES
+import json
 
 
 class Interest(models.Model):
@@ -17,3 +18,9 @@ class User(auth_models.AbstractUser):
 
     def __str__(self):
         return '{} {}'.format(self.first_name, self.last_name)
+
+    def get_interests_as_json(self):
+        interest_list = []
+        for interest in self.interests.all():
+            interest_list.append(interest.type)
+        return json.dumps(interest_list)

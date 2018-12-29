@@ -87,10 +87,10 @@
 {% endblock main_content %}
 
 {% block scripts %}
-    {% if currentUser %}
+    {% if user.is_authenticated %}
     <script type='text/javascript' src='{% static "mapper/js/maps.js" %}'
-            data-user-interests='' id='mapScript'></script>
-            <!--data-user-interests='<%= JSON.stringify(Object.keys(currentUser.interests)) %>'-->
+            data-user-interests='{{ user.get_interests_as_json }}' id='mapScript'>
+    </script>
     {% else %}
     <script type='text/javascript' src='{% static "mapper/js/maps.js" %}' data-user-interests='' id='mapScript'></script>
     {% endif %}
