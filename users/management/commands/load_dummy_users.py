@@ -20,6 +20,7 @@ class Command(BaseCommand):
     def _create_user(self, super_user=False):
         username = 'superuser' if super_user else 'user'
         user = RendezVousUser(
+            first_name=username,
             username=username,
             email='{}@rendezvous.com'.format(username),
             date_of_birth=date(1990, 1, 1).isoformat(),
