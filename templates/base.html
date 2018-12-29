@@ -29,23 +29,23 @@
                 <a data-href='{% url "mapper:index" %}'><i class='cube icon logo'></i></a>
                 <p class='logo__text'>Rendez Vous</p>
             </header>
-            {% if not currentUser %}
+            {% if user.is_authenticated %}
+            <div class='right menu'>
+                <a class='item'>
+                    <span class='menu__signed-in-as'>Signed in as: </span>
+                    <span class='menu__user menu__user--lg'>{{ user.first_name }} {{ user.last_name }}</span>
+                    <span class='menu__user menu__user--sm'>{{ user.first_name }}</span>
+                </a>
+                <a class='item menu__logout' data-href='{% url "logout" %}'>Logout</a>
+                <a class='item menu__logout-icon' data-href='{% url "logout" %}'><i class='sign out icon'></i></a>
+            </div>
+            {% else %}
             <div class='right menu'>
                 <!-- TODO: Update sw.js when you update this -->
                 <a class='item menu__register' data-href='/register'>Sign Up</a>
                 <a class='item menu__login' data-href='{% url "login" %}'>Login</a>
                 <a class='item menu__register-icon' data-href='/register'><i class='add user icon'></i></a>
                 <a class='item menu__login-icon' data-href='{% url "login" %}'><i class='sign in icon'></i></a>
-            </div>
-            {% else %}
-            <div class='right menu'>
-                <a class='item'>
-                    <span class='menu__signed-in-as'>Signed in as: </span>
-                    <span class='menu__user menu__user--lg'>{{ currentUser.firstName }} {{ currentUser.lastName }}</span>
-                    <span class='menu__user menu__user--sm'>{{ currentUser.firstName }}</span>
-                </a>
-                <a class='item menu__logout' data-href='{% url "logout" %}'>Logout</a>
-                <a class='item menu__logout-icon' data-href='{% url "logout" %}'><i class='sign out icon'></i></a>
             </div>
             {% endif %}
         </div>
