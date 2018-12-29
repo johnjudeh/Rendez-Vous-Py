@@ -4,7 +4,7 @@ from .constants.interests import INTEREST_CATEGORY_CHOICES, INTEREST_TYPE_CHOICE
 
 
 class Interest(models.Model):
-    type = models.CharField(max_length=50, choices=INTEREST_TYPE_CHOICES)
+    type = models.CharField(max_length=50, choices=INTEREST_TYPE_CHOICES, unique=True)
     category = models.CharField(max_length=50, choices=INTEREST_CATEGORY_CHOICES)
 
     def __str__(self):
