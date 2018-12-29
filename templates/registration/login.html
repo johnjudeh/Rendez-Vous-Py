@@ -3,7 +3,6 @@
 {% block main_content %}
 <main class='main-forms main-forms--login'>
 
-    <!--TODO: Find out what this is for-->
     {% if next %}
         {% if user.is_authenticated %}
         <p>Your account doesn't have access to this page. To proceed,
@@ -62,7 +61,6 @@
             <a class='ui grey button form-buttons__button' data-href='{% url "mapper:index" %}'>Go Back</a>
             <!--<button class='ui teal button form-buttons__button'>Submit</button>-->
             <input class='ui teal button form-buttons__button' type='submit' value='login'>
-            <!--TODO: Find out what this is for-->
             <input type='hidden' name='next' value='{{ next }}'>
         </section>
     </form>
