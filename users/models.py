@@ -11,7 +11,7 @@ class Interest(models.Model):
         return '{} - {}'.format(self.get_type_display(), self.get_category_display())
 
 
-class RendezVousUser(auth_models.User):
+class User(auth_models.AbstractUser):
     date_of_birth = models.DateField()
     interests = models.ManyToManyField(Interest)
 

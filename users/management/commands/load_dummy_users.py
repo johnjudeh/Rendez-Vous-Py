@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
-from users.models import RendezVousUser, Interest
+from users.models import User, Interest
 from users.constants.interests import (
     INTEREST_TYPE_TO_CATEGORY_MAPPING, INTEREST_BAR, INTEREST_RESTAURANT, INTEREST_NIGHT_CLUB
 )
@@ -10,7 +10,7 @@ class Command(BaseCommand):
 
     def _set_up_interest_mapping(self):
         for interest_type, interest_cat in INTEREST_TYPE_TO_CATEGORY_MAPPING.items():
-            if Interest.objects.filter(type=interest_type).count() == 0:
+            if not Interest.objects.filter(type=interest_type).exists():
                 Interest.objects.create(
                     type=interest_type,
                     category=interest_cat,
@@ -19,7 +19,7 @@ class Command(BaseCommand):
 
     def _create_user(self, super_user=False):
         username = 'superuser' if super_user else 'user'
-        user = RendezVousUser(
+        user = User(
             first_name=username,
             username=username,
             email='{}@rendezvous.com'.format(username),
