@@ -12,6 +12,8 @@ class Interest(models.Model):
         return '{} - {}'.format(self.get_type_display(), self.get_category_display())
 
 
+# TODO: This should be split up into a User & UserProfile class according to file:///Users/John/Documents/3.SkillsDev/Computing/Python/Django/django/docs/_build/html/topics/auth/customizing.html#extending-the-existing-user-model
+# TODO: Write custom user manager as well
 class User(auth_models.AbstractUser):
     date_of_birth = models.DateField()
     interests = models.ManyToManyField(Interest)
