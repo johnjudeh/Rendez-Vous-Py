@@ -30,6 +30,7 @@
 
         <div class='ui error message'>
             <header class='header'>We had some issues</header>
+            <!--TODO: Format errors properly-->
             <p> {{ form.errors }} </p>
         </div>
 
@@ -60,14 +61,14 @@
         <section class='form-buttons'>
             <a class='ui grey button form-buttons__button' data-href='{% url "mapper:index" %}'>Go Back</a>
             <!--<button class='ui teal button form-buttons__button'>Submit</button>-->
-            <input type="submit" value="login">
+            <input class='ui teal button form-buttons__button' type='submit' value='login'>
             <!--TODO: Find out what this is for-->
-            <input type="hidden" name="next" value="{{ next }}">
+            <input type='hidden' name='next' value='{{ next }}'>
         </section>
     </form>
 
     <!--TODO: Come back to this and style it properly-->
-    <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+    <p><a href='{% url "password_reset" %}'>Lost password?</a></p>
 
 </main>
 {% endblock main_content %}
