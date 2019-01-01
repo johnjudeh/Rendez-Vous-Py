@@ -3,7 +3,6 @@ from users.models import User, Interest
 from users.constants.interests import (
     INTEREST_TYPE_TO_CATEGORY_MAPPING, INTEREST_BAR, INTEREST_RESTAURANT, INTEREST_NIGHT_CLUB
 )
-from datetime import date
 
 class Command(BaseCommand):
     help = 'Loads dummy users to the database for local testing'
