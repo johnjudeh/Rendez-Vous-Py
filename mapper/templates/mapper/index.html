@@ -89,7 +89,7 @@
 {% block scripts %}
     {% if user.is_authenticated %}
     <script type='text/javascript' src='{% static "mapper/js/maps.js" %}'
-            data-user-interests='{{ user.get_interests_as_json }}' id='mapScript'>
+            data-user-interests='{{ user.profile.get_interests_as_json }}' id='mapScript'>
     </script>
     {% else %}
     <script type='text/javascript' src='{% static "mapper/js/maps.js" %}' data-user-interests='' id='mapScript'></script>

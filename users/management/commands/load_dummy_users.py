@@ -19,20 +19,29 @@ class Command(BaseCommand):
 
     def _create_user(self, super_user=False):
         username = 'superuser' if super_user else 'user'
-        user = User(
-            first_name=username,
-            username=username,
-            email='{}@rendezvous.com'.format(username),
-            date_of_birth=date(1990, 1, 1).isoformat(),
-            is_staff=(True if super_user else False),
-            is_superuser=(True if super_user else False),
-        )
-        user.set_password('password')
-        user.save()
+        email = f'{username}@rendezvous.com'
+        password = 'password'
+
+        if super_user:
+            user = User.objects.create_superuser(
+                first_name=username,
+                username=username,
+                email=email,
+                password=password
+            )
+        else:
+            user = User.objects.create_user(
+                first_name=username,
+                username=username,
+                email=email,
+                password=password
+            )
+
         interest_bar = Interest.objects.get(type=INTEREST_BAR)
         interest_restaurant = Interest.objects.get(type=INTEREST_RESTAURANT)
         interest_night_club = Interest.objects.get(type=INTEREST_NIGHT_CLUB)
-        user.interests.add(
+
+        user.profile.interests.add(
             interest_bar,
             interest_restaurant,
             interest_night_club,
@@ -42,4 +51,4 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self._set_up_interest_mapping()
         self._create_user(super_user=True)
-        self._create_user(super_user=False)
+        self._create_user()
