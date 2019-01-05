@@ -9,13 +9,13 @@ class Interest(models.Model):
     category = models.CharField(max_length=50, choices=INTEREST_CATEGORY_CHOICES)
 
     def __str__(self):
-        return '{} - {}'.format(self.get_type_display(), self.get_category_display())
+        return f'{self.get_type_display()} - {self.get_category_display()}'
 
 
 class User(AbstractUser):
 
     def __str__(self):
-        return '{} {}'.format(self.first_name, self.last_name)
+        return f'{self.username}'
 
 
 class Profile(models.Model):
