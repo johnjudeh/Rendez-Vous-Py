@@ -10,14 +10,11 @@
         are chosen based on the group&apos;s shared interests.'>
     <link rel='shortcut icon' href='{% static "mapper/imgs/favicon.png" %}' type='image/x-icon'>
     <link rel='manifest' href='{% static "mapper/manifest.json" %}'>
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css'>
+    <link rel='stylesheet' href='{% static "mapper/css/semantic.min.css" %}'>
     <link rel='stylesheet' href='{% static "mapper/css/app.css" %}'>
     <link href='https://fonts.googleapis.com/css?family=Oleo+Script+Swash+Caps|Roboto' rel='stylesheet'>
-    <script
-            src='https://code.jquery.com/jquery-3.2.1.min.js'
-            integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4='
-            crossorigin='anonymous'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.js'></script>
+    <script src='{% static "mapper/js/jquery-3.3.1.min.js" %}'></script>
+    <script src='{% static "mapper/js/semantic.min.js" %}'></script>
 </head>
 {% block body_opening_tag %}
 <body>
@@ -42,9 +39,9 @@
             {% else %}
             <div class='right menu'>
                 <!-- TODO: Update sw.js when you update this -->
-                <a class='item menu__register' data-href='/register'>Sign Up</a>
+                <a class='item menu__register' data-href='{% url "users:register" %}'>Sign Up</a>
                 <a class='item menu__login' data-href='{% url "login" %}'>Login</a>
-                <a class='item menu__register-icon' data-href='/register'><i class='add user icon'></i></a>
+                <a class='item menu__register-icon' data-href='{% url "users:register" %}'><i class='add user icon'></i></a>
                 <a class='item menu__login-icon' data-href='{% url "login" %}'><i class='sign in icon'></i></a>
             </div>
             {% endif %}
