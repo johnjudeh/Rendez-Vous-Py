@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main_content %}
+<main class='main-forms main-forms--register'>
+
+    {% if form.errors %}
+    <form class='ui form error' action='{% url "users:register" %}' method='post'>
+    {% else %}
+    <form class='ui form' action='{% url "users:register" %}' method='post'>
+    {% endif %}
+
+        <div class='ui error message'>
+            <header class='header'>We had some issues</header>
+            <p> {{ form.errors }}</p>
+        </div>
+
+        {% csrf_token %}
+
+        <section class='ui' id='personalForm'>
+            <section>
+                <h4 class='ui horizontal divider form'>Personal Details</h4>
+
+                {% for field in user_form %}
+                <div class='field'>
+                    {{ field.errors }}
+                    {{ field.label_tag }}
+                    {{ field }}
+                </div>
+                {% endfor %}
+
+            <section class='form-buttons'>
+                <a href='{% url "mapper:index" %}' class='ui grey button back form-buttons__button'>Back</a>
+                <input type='submit' class='ui teal button form-buttons__button' tabindex='0'>
+            </section>
+        </section>
+    </form>
+</main>
+
+{% endblock main_content %}
