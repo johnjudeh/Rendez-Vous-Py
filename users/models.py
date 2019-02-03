@@ -9,7 +9,7 @@ class Interest(models.Model):
     category = models.CharField(max_length=50, choices=INTEREST_CATEGORY_CHOICES)
 
     def __str__(self):
-        return f'{self.get_type_display()} - {self.get_category_display()}'
+        return f'{self.get_type_display()} // {self.get_category_display().upper()}'
 
 
 class User(AbstractUser):
