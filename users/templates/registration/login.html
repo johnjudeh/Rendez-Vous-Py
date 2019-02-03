@@ -3,25 +3,7 @@
 {% block main_content %}
 <main class='main-forms main-forms--login'>
 
-    {% if next %}
-        {% if user.is_authenticated %}
-        <p>Your account doesn't have access to this page. To proceed,
-        please login with an account that has access.</p>
-        {% else %}
-        <p>Please login to see this page.</p>
-        {% endif %}
-    {% endif %}
-
-    <!--TODO: Check toast messages were added properly-->
-    <!--<% if (error && error.length > 0) { %>-->
-    <!--<form class='ui error form' action='/login' method='post'>-->
-    <!--<% } else if (success && success.length > 0) { %>-->
-    <!--<form class='ui success form' action='/login' method='post'>-->
-    <!--<% } else { %>-->
-    <!--<form class='ui form' action='/login' method='post'>-->
-    <!--<% } %>-->
-
-    {% if form.errors %}
+    {% if form.errors or next %}
     <form class='ui form error' action='{% url "login" %}' method='post'>
     {% else %}
     <form class='ui form' action='{% url "login" %}' method='post'>
@@ -30,7 +12,17 @@
         <div class='ui error message'>
             <header class='header'>We had some issues</header>
             <!--TODO: Format errors properly-->
-            <p> {{ form.errors }} </p>
+
+            {% if form.errors %}
+                <p>{{ form.errors }}</p>
+            {% elif next %}
+                {% if user.is_authenticated %}
+                <p>Your account doesn't have access to this page. To proceed,
+                please login with an account that has access.</p>
+                {% else %}
+                <p>Please login to see this page.</p>
+                {% endif %}
+            {% endif %}
         </div>
 
         <!--TODO: Check if you need a success toast message here-->

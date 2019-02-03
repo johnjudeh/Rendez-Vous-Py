@@ -689,25 +689,26 @@ a {
   padding: 4px;
 }
 
-.interests__label[data-cat='Attractions'] {
+.interests__label:nth-of-type(4n+1) {
   background-color: #995d81;
   /* background-color: #A5CBC3; */
 }
 
-.interests__label[data-cat='Out & About'] {
+.interests__label:nth-of-type(4n+2) {
   background-color: #F6BD60;
   /* background-color: #efcb68; */
 }
 
-.interests__label[data-cat='Adventure'] {
+.interests__label:nth-of-type(4n+3) {
   background-color: #8ed081;
 }
 
-.interests__label[data-cat='Night Life'] {
+.interests__label:nth-of-type(4n+4) {
   background-color: #e16F7c;
   /* background-color: #F28482; */
 }
 
+/*
 .interests__label[data-cat='Smarts & Arts'] {
   background-color: #c89b7b;
 }
@@ -715,13 +716,16 @@ a {
 .interests__label[data-cat='Wellness'] {
   background-color: #a3bcf9;
 }
+*/
 
 .interests__label-content {
   width: 120px;
   margin: 19px auto;
   text-align: center;
+  color: rgb(251, 255, 254);
 }
 
+/* TODO: Delete when happy with
 .interests__label-type {
   margin: 0;
   color: rgb(251, 255, 254);
@@ -731,6 +735,7 @@ a {
   font-size: 0.9em;
   color: rgba(251, 255, 254, 0.9);
 }
+*/
 
 /* Interests Checkboxes */
 

@@ -23,12 +23,13 @@
     <nav class='ui inverted menu nav'>
         <div class='ui container'>
             <header class='header item'>
+                <!--TODO: Get rid of all the data-hrefs as ruins accessibility-->
                 <a data-href='{% url "mapper:index" %}'><i class='cube icon logo'></i></a>
                 <p class='logo__text'>Rendez Vous</p>
             </header>
             {% if user.is_authenticated %}
             <div class='right menu'>
-                <a class='item'>
+                <a class='item' data-href='{% url "users:profile" id=user.id %}'>
                     <span class='menu__signed-in-as'>Signed in as: </span>
                     <span class='menu__user menu__user--lg'>{{ user.first_name }} {{ user.last_name }}</span>
                     <span class='menu__user menu__user--sm'>{{ user.first_name }}</span>

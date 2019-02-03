@@ -30,8 +30,8 @@
                 {% endfor %}
 
             <section class='form-buttons'>
-                <a href='{% url "mapper:index" %}' class='ui grey button back form-buttons__button'>Back</a>
-                <input type='submit' class='ui teal button form-buttons__button' tabindex='0'>
+                <a class='ui grey button back form-buttons__button' data-href='{% url "mapper:index" %}'>Back</a>
+                <input type='submit' value='Register' class='ui teal button form-buttons__button' tabindex='0'>
             </section>
         </section>
     </form>

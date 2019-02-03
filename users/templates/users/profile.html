@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main_content %}
+<!--TODO: Update the css class to be main-forms--max-width-->
+<main class='main-forms main-forms--register'>
+
+    {% if messages %}
+
+    {% for message in messages %}
+    {% if forloop.first %}
+    <form class='ui form {{ message.tags }}' action='{% url "users:profile" id=user.id %}' method='post'>
+    {% endif %}
+
+        <div class='ui success message'>
+            <header class='header'>Hoorah!</header>
+            <p>{{ message }}</p>
+        </div>
+    {% endfor %}
+
+    {% elif form.errors %}
+    <form class='ui form error' action='{% url "users:profile" id=user.id %}' method='post'>
+    {% else %}
+    <form class='ui form' action='{% url "users:profile" id=user.id %}' method='post'>
+    {% endif %}
+
+        <div class='ui error message'>
+            <header class='header'>We had some issues</header>
+            <p> {{ form.errors }}</p>
+        </div>
+
+        {% csrf_token %}
+
+        <section class='ui' id='interestsForm'>
+            <header>
+                <h4 class='ui horizontal divider interests'>Your Interests</h4>
+            </header>
+
+            <section class='interests'>
+
+                {% for interest in profile_form.interests %}
+
+                {{ interest.tag }}
+                <label class='interests__label' for='{{ interest.id_for_label }}'>
+                    <div class='interests__label-content'>
+                        <!--TODO: Find better way to show category & type-->
+                        {{ interest.choice_label }}
+                    </div>
+                </label>
+
+                {% endfor %}
+
+            </section>
+
+            <section class='form-buttons'>
+                <a class='ui grey button form-buttons__button' data-href='/'>Home</a>
+                <input type='submit' value='Save' class='ui teal button next form-buttons__button' tabindex='0'>
+            </section>
+        </section>
+
+    </form>
+</main>
+
+{% endblock main_content %}
