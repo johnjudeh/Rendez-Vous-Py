@@ -1,6 +1,8 @@
 const staticCacheName = 'rendezvous-static-v1';
 const cacheWhiteList = [ staticCacheName ];
-const STATIC_PREFIX = '/static/mapper'
+const STATIC_PREFIX = '/static'
+const RV_STATIC_PREFIX = `${STATIC_PREFIX}/rendezvous`
+const MAPPER_STATIC_PREFIX = `${STATIC_PREFIX}/mapper`
 
 // Event fires when service worker is first discovered
 self.addEventListener('install', event => {
@@ -11,16 +13,15 @@ self.addEventListener('install', event => {
         // TODO: Come back to fix these rotues once authentication is added
         // '/register',
         // '/login',
-        STATIC_PREFIX + '/manifest.json',
-        STATIC_PREFIX + '/js/maps.js',
-        STATIC_PREFIX + '/js/register.js',
-        STATIC_PREFIX + '/js/sw/index.js',
-        STATIC_PREFIX + '/js/manup.min.js',
-        STATIC_PREFIX + '/js/pwa-nav.js',
-        STATIC_PREFIX + '/css/app.css',
-        STATIC_PREFIX + '/avatars/male.png',
-        STATIC_PREFIX + '/avatars/female.png',
-        STATIC_PREFIX + '/avatars/ninja.png',
+        RV_STATIC_PREFIX + '/manifest.json',
+        MAPPER_STATIC_PREFIX + '/js/maps.js',
+        RV_STATIC_PREFIX + '/js/sw/index.js',
+        RV_STATIC_PREFIX + '/js/manup.min.js',
+        RV_STATIC_PREFIX + '/js/pwa-nav.js',
+        RV_STATIC_PREFIX + '/css/app.css',
+        MAPPER_STATIC_PREFIX + '/avatars/male.png',
+        MAPPER_STATIC_PREFIX + '/avatars/female.png',
+        MAPPER_STATIC_PREFIX + '/avatars/ninja.png',
         'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css',
         'https://fonts.googleapis.com/css?family=Oleo+Script+Swash+Caps|Roboto:400,400i,500,700,700i',
         'https://code.jquery.com/jquery-3.2.1.min.js',

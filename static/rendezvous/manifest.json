@@ -10,35 +10,35 @@
   "lang": "en-GB",
   "dir": "ltr",
   "icons": [{
-    "src": "/icon/rendez-vous-icon-256x256.png",
+    "src": "/static/rendezvous/icon/rendez-vous-icon-256x256.png",
     "type": "image/png",
     "sizes": "256x256"
   }, {
-    "src": "/icon/rendez-vous-icon-192x192.png",
+    "src": "/static/rendezvous/icon/rendez-vous-icon-192x192.png",
     "type": "image/png",
     "sizes": "192x192"
   }, {
-    "src": "/icon/rendez-vous-icon-128x128.png",
+    "src": "/static/rendezvous/icon/rendez-vous-icon-128x128.png",
     "type": "image/png",
     "sizes": "128x128"
   }, {
-    "src": "/icon/rendez-vous-icon-114x114.png",
+    "src": "/static/rendezvous/icon/rendez-vous-icon-114x114.png",
     "type": "image/png",
     "sizes": "114x114"
   }, {
-    "src": "/icon/rendez-vous-icon-96x96.png",
+    "src": "/static/rendezvous/icon/rendez-vous-icon-96x96.png",
     "type": "image/png",
     "sizes": "96x96"
   }, {
-    "src": "/icon/rendez-vous-icon-72x72.png",
+    "src": "/static/rendezvous/icon/rendez-vous-icon-72x72.png",
     "type": "image/png",
     "sizes": "72x72"
   }, {
-    "src": "/icon/rendez-vous-icon-60x60.png",
+    "src": "/static/rendezvous/icon/rendez-vous-icon-60x60.png",
     "type": "image/png",
     "sizes": "60x60"
   }, {
-    "src": "/icon/rendez-vous-icon-57x57.png",
+    "src": "/static/rendezvous/icon/rendez-vous-icon-57x57.png",
     "type": "image/png",
     "sizes": "57x57"
   }]
