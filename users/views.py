@@ -55,6 +55,6 @@ class ProfileView(View):
         if profile_form.is_valid():
             profile_form.save()
             messages.success(request, self.success_message)
-            return redirect('users:profile', id=authenticated_user.id,)
+            return redirect('users:profile', id=authenticated_user.id)
 
         return render(request, self.template_name, {'profile_form': profile_form})
