@@ -61,4 +61,4 @@ class ServiceWorker {
   }
 }
 
-const serviceWorker = new ServiceWorker();
+//const serviceWorker = new ServiceWorker();
