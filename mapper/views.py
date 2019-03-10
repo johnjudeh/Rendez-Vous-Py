@@ -1,8 +1,14 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.views.generic.base import TemplateView
 import os
 
-GOOGLE_MAPS_API_KEY = os.environ.get('MAPS_KEY')
+MAPS_KEY_LABEL = 'MAPS_KEY'
+GOOGLE_MAPS_API_KEY = os.environ.get(MAPS_KEY_LABEL)
 
-def index(request):
-    return render(request, 'mapper/index.html', {'MAPS_KEY': GOOGLE_MAPS_API_KEY})
+class MapperView(TemplateView):
+
+    template_name = 'mapper/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context[MAPS_KEY_LABEL] = GOOGLE_MAPS_API_KEY
+        return context

@@ -1,8 +1,8 @@
 """ Mapper URL Config """
 from django.urls import path
-from . import views
+from .views import MapperView
 
 app_name = 'mapper'
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', MapperView.as_view(), name='index'),
 ]
