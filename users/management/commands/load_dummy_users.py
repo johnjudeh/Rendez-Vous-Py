@@ -7,16 +7,17 @@ from users.constants.interests import (
 class Command(BaseCommand):
     help = 'Loads dummy users to the database for local testing'
 
-    def _set_up_interest_mapping(self):
+    def _set_up_interest_mapping(self, silent=False):
         for interest_type, interest_cat in INTEREST_TYPE_TO_CATEGORY_MAPPING.items():
             if not Interest.objects.filter(type=interest_type).exists():
                 Interest.objects.create(
                     type=interest_type,
                     category=interest_cat,
                 )
-        self.stdout.write(self.style.SUCCESS('Successfully set up interest category mapping'))
+        if not silent:
+            self.stdout.write(self.style.SUCCESS('Successfully set up interest category mapping'))
 
-    def _create_user(self, super_user=False):
+    def _create_user(self, super_user=False, silent=False):
         username = 'superuser' if super_user else 'user'
         email = f'{username}@rendezvous.com'
         password = 'password'
@@ -45,9 +46,21 @@ class Command(BaseCommand):
             interest_restaurant,
             interest_night_club,
         )
-        self.stdout.write(self.style.SUCCESS('Successfully created {} account'.format(username)))
+        if not silent:
+            self.stdout.write(self.style.SUCCESS('Successfully created {} account'.format(username)))
+
+    def add_arguments(self, parser):
+        """
+        Allows user to silence the output of command.
+        Useful when running command with tests
+        """
+        parser.add_argument(
+            '--silent', action='store_true',
+            help='Stop command from printing to the stdout'
+        )
 
     def handle(self, *args, **options):
-        self._set_up_interest_mapping()
-        self._create_user(super_user=True)
-        self._create_user()
+        silent_flag = options['silent']
+        self._set_up_interest_mapping(silent=silent_flag)
+        self._create_user(super_user=True, silent=silent_flag)
+        self._create_user(silent=silent_flag)
