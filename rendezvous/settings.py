@@ -135,5 +135,9 @@ STATICFILES_DIRS = [
 # Authentication
 
 AUTH_USER_MODEL = 'users.User'
+
+LOGIN_URL = 'login' # This is the named url pattern
+
 LOGIN_REDIRECT_URL = 'mapper:index'
+
 LOGOUT_REDIRECT_URL = 'mapper:index'

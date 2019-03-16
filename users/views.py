@@ -1,5 +1,6 @@
 from django.views import View
 from django.contrib.auth import login
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
 
@@ -7,14 +8,24 @@ from .forms import UserForm, ProfileForm
 from .models import Profile
 
 class RegisterView(View):
+    """Handles register view"""
 
     template_name = 'registration/register.html'
 
     def get(self, request, *args, **kwargs):
+        """Loads the register view if there is no logged in user"""
+        user = request.user
+        if user.is_authenticated:
+            return redirect(reverse('mapper:index'))
+
         user_form = UserForm()
         return render(request, self.template_name, {'user_form': user_form})
 
     def post(self, request, *args, **kwargs):
+        """
+        Checks validity of posted data and either creates the
+        new user or renders the form again with errors
+        """
         # Binds POST data to the form
         user_form = UserForm(request.POST)
 
@@ -30,12 +41,14 @@ class RegisterView(View):
         return render(request, self.template_name, {'user_form': user_form})
 
 
-class ProfileView(View):
+class ProfileView(LoginRequiredMixin, View):
+    """Handles the user profile view. Requires user to be logged in"""
 
     template_name = 'users/profile.html'
     success_message = 'You have successfully updated your interests'
 
     def get(self, request, *args, **kwargs):
+        """Shows the user his own profile or redirects to the login page"""
         authenticated_user = request.user
 
         # Checks if user has access to requested profile
@@ -48,6 +61,10 @@ class ProfileView(View):
         return redirect(unauthenticated_url)
 
     def post(self, request, *args, **kwargs):
+        """
+        Handles profile form data and either updates
+        profile or renders the form again with errors
+        """
         authenticated_user = request.user
         user_profile = Profile.objects.get(user=authenticated_user)
         profile_form = ProfileForm(request.POST, instance=user_profile)
