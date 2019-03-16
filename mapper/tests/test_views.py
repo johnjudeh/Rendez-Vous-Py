@@ -68,8 +68,12 @@ class MapperViewTestCase(TestCase):
 
     def test_mapper_view_get_with_user(self):
         """Tests a successful GET request to the mapper index page with a normal user"""
-        successful_login = self.client.login(**self.user_credentials)
-        self.assertIs(successful_login, True)
+        user_cred = self.user_credentials
+        successful_login = self.client.login(
+            username=user_cred['username'],
+            password=user_cred['password'],
+        )
+        self.assertEqual(successful_login, True)
 
         if successful_login:
             response = self.client.get(self.url)
@@ -78,8 +82,12 @@ class MapperViewTestCase(TestCase):
 
     def test_mapper_view_get_with_superuser(self):
         """Tests a successful GET request to the mapper index page with a super user"""
-        successful_login = self.client.login(**self.superuser_credentials)
-        self.assertIs(successful_login, True)
+        superuser_cred = self.superuser_credentials
+        successful_login = self.client.login(
+            username=superuser_cred['username'],
+            password=superuser_cred['password'],
+        )
+        self.assertEqual(successful_login, True)
 
         if successful_login:
             response = self.client.get(self.url)
