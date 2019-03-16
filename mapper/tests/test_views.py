@@ -32,7 +32,7 @@ class MapperViewTestCase(TestCase):
         This will be run before each test case.
         """
         self.user = User.objects.create_user(**self.user_credentials)
-        self.superuser = User.objects.create_user(**self.superuser_credentials)
+        self.superuser = User.objects.create_superuser(**self.superuser_credentials)
 
     def tearDown(self):
         """
