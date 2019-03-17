@@ -56,4 +56,4 @@ class Profile(models.Model):
         be used in templates rather than specifically writing it out.
         Try to always define this on your models.
         """
-        return reverse('users:profile', args=[self.user.id])
+        return reverse('users:profile', kwargs={'id': self.user.id})

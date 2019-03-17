@@ -151,4 +151,4 @@ class ProfileTestCase(TestCase):
 
     def test_get_absolute_url(self):
         profile = self.profile_with_interests
-        self.assertEqual(profile.get_absolute_url(), reverse('users:profile', args=[profile.user.id]))
+        self.assertEqual(profile.get_absolute_url(), reverse('users:profile', kwargs={'id': profile.user.id}))
