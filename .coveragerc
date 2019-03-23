@@ -1,0 +1,7 @@
+[run]
+source = .
+omit = */test*, rendezvous/*, manage.py, */migrations/*, */apps.py
+
+[report]
+precision = 2
+show_missing = true
