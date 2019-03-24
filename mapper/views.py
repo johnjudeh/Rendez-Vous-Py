@@ -4,6 +4,7 @@ import os
 MAPS_KEY_LABEL = 'MAPS_KEY'
 GOOGLE_MAPS_API_KEY = os.environ.get(MAPS_KEY_LABEL)
 
+
 class MapperView(TemplateView):
 
     template_name = 'mapper/index.html'

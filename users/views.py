@@ -7,6 +7,7 @@ from django.contrib import messages
 from .forms import UserForm, ProfileForm
 from .models import Profile
 
+
 class RegisterView(View):
     """Handles register view"""
 
