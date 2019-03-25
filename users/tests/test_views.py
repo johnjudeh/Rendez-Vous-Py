@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth import get_user
 from users.views import RegisterView, ProfileView
-from users.models import User, Interest
+from users.models import User, Interest, Profile
 from users.constants.interests import (
     INTEREST_CATEGORY_ATTRACTIONS, INTEREST_AQUARIUM, INTEREST_ART_GALLERY
 )
@@ -160,7 +160,7 @@ class ProfileViewTestCase(TestCase):
             self.assertEqual(form['interests'].value(), [interest.id for interest in self.user.profile.interests.all()])
 
     def test_get_different_user_profile(self):
-        """Test logged in user accessing his someone else's profile"""
+        """Test logged in user accessing someone else's profile"""
         client = self.client
         user_credentials = self.user_credentials
 
@@ -185,6 +185,26 @@ class ProfileViewTestCase(TestCase):
             self.assertEqual(response.resolver_match.func.__name__, self.view_class.as_view().__name__)
             self.assertEqual(response.status_code, 302)
             self.assertEqual(response['location'], f'{reverse("login")}?next={second_user_profile_url}')
+
+    def test_get_non_existent_user_profile(self):
+        """Test logged in user accessing a non-existent user's profile"""
+        client = self.client
+        user_credentials = self.user_credentials
+        # Log in user and check it was successful
+        successful_login = client.login(
+            username=user_credentials['username'],
+            password=user_credentials['password'],
+        )
+        self.assertTrue(successful_login)
+
+        if successful_login:
+            # Try to access a user's profile which does not exist
+            non_existent_user_profile_url = reverse('users:profile', kwargs={'id': self.user.id + 1})
+            response = client.get(non_existent_user_profile_url)
+
+            # Check request was handled by correct view and was redirected to correct url
+            self.assertEqual(response.resolver_match.func.__name__, self.view_class.as_view().__name__)
+            self.assertEqual(response.status_code, 404)
 
     def test_post_with_valid_form(self):
         """Test updating profile with valid form"""

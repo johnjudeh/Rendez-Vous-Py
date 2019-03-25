@@ -3,6 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
+from django.http import Http404
 
 from .forms import UserForm, ProfileForm
 from .models import Profile
@@ -51,10 +52,16 @@ class ProfileView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         """Shows the user his own profile or redirects to the login page"""
         authenticated_user = request.user
+        user_id = kwargs['id']
+
+        # Checks if the profile id requested exists
+        try:
+            user_profile = Profile.objects.get(user_id=user_id)
+        except Profile.DoesNotExist:
+            raise Http404('User does not exist')
 
         # Checks if user has access to requested profile
-        if authenticated_user.id == kwargs['id']:
-            user_profile = Profile.objects.get(user=authenticated_user)
+        if authenticated_user.id == user_id:
             profile_form = ProfileForm(instance=user_profile)
             return render(request, self.template_name, {'profile_form': profile_form})
 
