@@ -37,7 +37,7 @@ class RegisterView(View):
             new_user.save()
             user_form.save_m2m()
             login(request, new_user)
-            return redirect('users:profile', id=new_user.id)
+            return redirect(new_user.profile)
 
         # Renders the form again but filled in not valid
         return render(request, self.template_name, {'user_form': user_form})
@@ -80,6 +80,6 @@ class ProfileView(LoginRequiredMixin, View):
         if profile_form.is_valid():
             profile_form.save()
             messages.success(request, self.success_message)
-            return redirect('users:profile', id=authenticated_user.id)
+            return redirect(user_profile)
 
         return render(request, self.template_name, {'profile_form': profile_form})
