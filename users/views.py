@@ -1,9 +1,8 @@
 from django.views import View
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
-from django.http import Http404
 
 from .forms import UserForm, ProfileForm
 from .models import Profile
@@ -55,10 +54,7 @@ class ProfileView(LoginRequiredMixin, View):
         user_id = kwargs['id']
 
         # Checks if the profile id requested exists
-        try:
-            user_profile = Profile.objects.get(user_id=user_id)
-        except Profile.DoesNotExist:
-            raise Http404('User does not exist')
+        user_profile = get_object_or_404(Profile, user_id=user_id)
 
         # Checks if user has access to requested profile
         if authenticated_user.id == user_id:
