@@ -1,13 +1,1 @@
-(function($) {
-    'use strict';
-    $(function() {
-        $('.cancel-link').on('click', function(e) {
-            e.preventDefault();
-            if (window.location.search.indexOf('&_popup=1') === -1) {
-                window.history.back();  // Go back if not a popup.
-            } else {
-                window.close(); // Otherwise, close the popup.
-            }
-        });
-    });
-})(django.jQuery);
+"use strict";!function(n){n(function(){n(".cancel-link").on("click",function(n){n.preventDefault(),-1===window.location.search.indexOf("&_popup=1")?window.history.back():window.close()})})}(django.jQuery);

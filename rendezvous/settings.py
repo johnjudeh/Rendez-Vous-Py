@@ -136,6 +136,13 @@ STATICFILES_DIRS = [
 ]
 
 
+# Gulp build process setup
+
+GULP_COMMAND_PROD = 'gulp'
+
+GULP_COMMAND_DEV = 'gulp'
+
+
 # Authentication
 
 AUTH_USER_MODEL = 'users.User'
