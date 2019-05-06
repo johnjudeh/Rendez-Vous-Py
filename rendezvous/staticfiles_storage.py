@@ -44,7 +44,7 @@ class ManifestStaticFilesStorage(DjangoManifestStaticFilesStorage):
         command = settings.GULP_COMMAND_DEV if settings.DEBUG else settings.GULP_COMMAND_PROD
         gulp_cli_args = command.split(' ')
 
-        # Creates a colon-separated string to store in environment variable
+        # Creates a colon-separated string of apps to pass to Gulp process
         installed_apps = [app.label for app in apps.get_app_configs()]
         installed_apps += ['rendezvous']
         installed_apps = str.join(':', installed_apps)
