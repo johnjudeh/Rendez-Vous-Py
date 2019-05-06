@@ -52,6 +52,10 @@ class RegisterViewTestCase(TestCase):
         form = response.context['user_form']
         self.assertFalse(form.is_bound)
 
+        # Test that caching headers are being added to successful GET responses
+        self.assertIn('no-cache', response['cache-control'])
+        self.assertIn('etag', response)
+
     def test_post_with_valid_form(self):
         client = self.client
         user_credentials = self.user_credentials
@@ -158,6 +162,11 @@ class ProfileViewTestCase(TestCase):
             self.assertIn(self.template_name, [template.name for template in response.templates])
             form = response.context['profile_form']
             self.assertEqual(form['interests'].value(), [interest.id for interest in self.user.profile.interests.all()])
+
+            # Test that caching headers are being added to successful GET responses
+            self.assertIn('no-cache', response['cache-control'])
+            self.assertIn('private', response['cache-control'])
+            self.assertIn('etag', response)
 
     def test_get_different_user_profile(self):
         """Test logged in user accessing someone else's profile"""

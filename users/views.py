@@ -3,11 +3,14 @@ from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_control
 
 from .forms import UserForm, ProfileForm
 from .models import Profile
 
 
+@method_decorator(cache_control(no_cache=True), name='dispatch')
 class RegisterView(View):
     """Handles register view"""
 
@@ -42,6 +45,7 @@ class RegisterView(View):
         return render(request, self.template_name, {'user_form': user_form})
 
 
+@method_decorator(cache_control(no_cache=True, private=True), name='dispatch')
 class ProfileView(LoginRequiredMixin, View):
     """Handles the user profile view. Requires user to be logged in"""
 

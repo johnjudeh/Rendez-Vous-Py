@@ -54,6 +54,9 @@ class MapperViewTestCase(TestCase):
         # Check view responded successfully with a HTML page
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response['content-type'], 'text/html; charset=utf-8')
+        # Test that caching headers are being added to successful GET responses
+        self.assertIn('no-cache', response['cache-control'])
+        self.assertIn('etag', response)
 
     def _test_logged_in_user_response_characteristics(self, response, user):
         """Test the response context has correct user instance in it"""
