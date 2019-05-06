@@ -29,10 +29,10 @@ class ManifestStaticFilesStorage(DjangoManifestStaticFilesStorage):
             (r"""(@import\s*["']\s*(.*?)["'])""", """@import url("%s")"""),
         )),
         ('*.js', (
-            (r"""(['"]\s*(/static/[^"']*?\.(?:js|png))["'])""", "'%s'"),
+            (f"""(['"]\\s*({settings.STATIC_URL}[^"']*?\\.(?:js|png))["'])""", "'%s'"),
         )),
         ('*.json', (
-            (r"""("\s*(/static/[^"]*?\.(?:js|png))")""", '"%s"'),
+            (f"""("\\s*({settings.STATIC_URL}[^"]*?\\.(?:js|png))")""", '"%s"'),
         )),
     )
 
