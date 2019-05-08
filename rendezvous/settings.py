@@ -157,3 +157,4 @@ LOGOUT_REDIRECT_URL = 'mapper:index'
 
 # Heroku Deployment - activates django-heroku
 django_heroku.settings(locals())
+
