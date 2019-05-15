@@ -20,7 +20,7 @@ DEBUG = False
 
 # Security Settings
 
-ALLOWED_HOSTS = ['rendezvous-py.herokuapp.com/']
+ALLOWED_HOSTS = ['rendezvous-py.herokuapp.com']
 
 
 # Deployment to Heroku
