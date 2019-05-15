@@ -23,11 +23,6 @@ DEBUG = False
 ALLOWED_HOSTS = ['https://rendezvous-py.herokuapp.com/']
 
 
-# Static Files
-
-STATIC_ROOT = '/var/www/static'
-
-
 # Deployment to Heroku
 
 django_heroku.settings(locals(), staticfiles=False, allowed_hosts=False)
