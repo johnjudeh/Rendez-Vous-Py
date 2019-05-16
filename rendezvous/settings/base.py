@@ -133,8 +133,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    # static_build needs to be at the top because
+    # it contains the gulp-processed static files
+    # which come from other directories
     os.path.join(BASE_DIR, 'static_build'),
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 
