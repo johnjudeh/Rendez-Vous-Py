@@ -1,12 +1,8 @@
-# from django.contrib.staticfiles.storage import ManifestStaticFilesStorage as DjangoManifestStaticFilesStorage
+"""Defines a custom staticfiles storage"""
 from whitenoise.storage import CompressedManifestStaticFilesStorage
-
 from django.conf import settings
-from django.apps import apps
-import os
-import subprocess
 
-# class ManifestStaticFilesStorage(DjangoManifestStaticFilesStorage):
+
 class ManifestStaticFilesStorage(CompressedManifestStaticFilesStorage):
     """
     A static file system storage backend which also saves
@@ -37,24 +33,3 @@ class ManifestStaticFilesStorage(CompressedManifestStaticFilesStorage):
             (f"""("\\s*({settings.STATIC_URL}[^"]*?\\.(?:js|png))")""", '"%s"'),
         )),
     )
-
-    # def post_process(self, *args, **kwargs):
-    #     # Run ManifestStaticFilesStorage's post_process
-    #     yield from super().post_process(*args, **kwargs)
-    #
-    #     # Pulls appropriate command from settings and splits into arguments for running in the shell
-    #     command = settings.GULP_COMMAND_DEV if settings.DEBUG else settings.GULP_COMMAND_PROD
-    #     gulp_cli_args = command.split(' ')
-    #
-    #     # Creates a colon-separated string of apps to pass to Gulp process
-    #     installed_apps = [app.label for app in apps.get_app_configs()]
-    #     installed_apps += ['rendezvous']
-    #     installed_apps = str.join(':', installed_apps)
-    #
-    #     # Run gulp task passing it the appropriate environment variables
-    #     os.environ['STATIC_ROOT'] = os.path.basename(settings.STATIC_ROOT)
-    #     os.environ['RENDEZVOUS_APPS'] = installed_apps
-    #     # TODO: Make sure this works with the build process
-    #     subprocess.run(gulp_cli_args, check=True)
-    #     del os.environ['STATIC_ROOT']
-    #     del os.environ['RENDEZVOUS_APPS']
