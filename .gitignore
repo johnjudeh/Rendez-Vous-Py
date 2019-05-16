@@ -11,4 +11,9 @@ __pycache__/
 
 # Front-end files
 
-node_modules/**
+node_modules/
+
+# Static files
+
+static_build/
+static_root/

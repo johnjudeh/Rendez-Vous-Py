@@ -9,7 +9,7 @@ self.addEventListener('install', event => {
         '/',
         '/register',
         '/login',
-        '/static/rendezvous/'
+        '/static/rendezvous/',
         '/static/rendezvous/manifest.json',
         '/static/mapper/js/maps.js',
         // TODO: Think about how to deal with /sw/index.js due as created an infinite loop for revving
