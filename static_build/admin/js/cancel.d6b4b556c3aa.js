@@ -1,1 +1,0 @@
-"use strict";!function(n){n(function(){n(".cancel-link").on("click",function(n){n.preventDefault(),-1===window.location.search.indexOf("&_popup=1")?window.history.back():window.close()})})}(django.jQuery);

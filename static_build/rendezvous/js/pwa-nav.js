@@ -1,1 +1,0 @@
-"use strict";var anchorTags=document.querySelectorAll("a");anchorTags.forEach(function(a){a.dataset.href&&a.addEventListener("click",function(){location.href=a.dataset.href})});

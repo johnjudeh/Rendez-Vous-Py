@@ -1,1 +1,0 @@
-"use strict";var django=django||{};django.jQuery=jQuery.noConflict(!0);

@@ -1,1 +1,0 @@
-"use strict";!function(n){n(document).ready(function(){var e=n("#django-admin-form-add-constants").data("modelName");n("body").on("click",".add-another",function(e){e.preventDefault();var t=n.Event("django:add-another-related");n(this).trigger(t),t.isDefaultPrevented()||showAddAnotherPopup(this)}),e&&n("form#"+e+"_form :input:visible:enabled:first").focus()})}(django.jQuery);
