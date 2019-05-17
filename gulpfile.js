@@ -1,4 +1,5 @@
-const gulp        = require('gulp'),
+const del         = require('del'),
+      gulp        = require('gulp'),
       csso        = require('gulp-csso'),
       babel       = require('gulp-babel'),
       uglify      = require('gulp-uglify'),
@@ -16,6 +17,12 @@ let djangoAppDirs = [
 // Add the static subfolder to each Django app dir
 djangoStaticDirs = djangoAppDirs.map(djangoAppDir => {
     return `${djangoAppDir}static`;
+});
+
+
+// Deletes contents of build folder
+gulp.task('clean', (done) => {
+  return del([`${STATIC_DEST}/**`]);
 });
 
 
@@ -65,4 +72,7 @@ gulp.task('images', (done) => {
 
 
 // Default taks - runs with collect static command in Django
-gulp.task('default', gulp.parallel('js', 'css', 'images'));
+gulp.task('default', gulp.series(
+  'clean',
+  gulp.parallel('js', 'css', 'images')
+));
