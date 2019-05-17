@@ -22,6 +22,18 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['rendezvous-py.herokuapp.com']
 
+SECURE_SSL_REDIRECT = True
+
+CSRF_COOKIE_SECURE = True
+
+SESSION_COOKIE_SECURE = True
+
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+SECURE_BROWSER_XSS_FILTER = True
+
+X_FRAME_OPTIONS = 'DENY'
+
 
 # Deployment to Heroku
 
