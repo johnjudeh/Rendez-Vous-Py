@@ -7,8 +7,8 @@ self.addEventListener('install', event => {
     caches.open(staticCacheName).then(cache => {
       return cache.addAll([
         '/',
-        '/register',
-        '/login',
+        '/users/register',
+        '/users/login',
         '/static/rendezvous/',
         '/static/rendezvous/manifest.json',
         '/static/mapper/js/maps.js',
