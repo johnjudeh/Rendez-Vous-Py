@@ -30,7 +30,9 @@ gulp.task('clean', (done) => {
 gulp.task('js', (done) => {
   // Loop through each django static dir and build it seperately
   djangoStaticDirs.forEach(staticDir => {
-    gulp.src(`${staticDir}/**/*.js`)
+    // Ignores any files that are already minified as they are external
+    // libraries so do not need anymore processing
+    gulp.src([`${staticDir}/**/*.js`, `!${staticDir}/**/*.min*.js`])
       .pipe(babel({
         presets: ['@babel/preset-env']
       }))
