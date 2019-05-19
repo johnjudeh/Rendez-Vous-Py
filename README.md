@@ -134,4 +134,4 @@ You should then be able to access the application at
 ## Acknowledgements
 
 A big thank you to all of the friends who have talked through this idea with me
-and helped me flesh out how it should work. This development is for you guys!
+and helped me flesh out how it should work. This project is for you guys!
