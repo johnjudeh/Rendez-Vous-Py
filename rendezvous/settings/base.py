@@ -140,7 +140,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-def addCustomHTTPHeaders(headers, path, url):
+
+def add_custom_http_headers(headers, path, url):
 
     if '/rendezvous/sw' in url:
         # Adds the 'Service-Worker-Allowed' header so that the service
@@ -152,7 +153,8 @@ def addCustomHTTPHeaders(headers, path, url):
         # application/manifest+json as per the specification
         headers['Content-Type'] = 'application/manifest+json'
 
-WHITENOISE_ADD_HEADERS_FUNCTION = addCustomHTTPHeaders
+
+WHITENOISE_ADD_HEADERS_FUNCTION = add_custom_http_headers
 
 
 # Gulp build process setup
