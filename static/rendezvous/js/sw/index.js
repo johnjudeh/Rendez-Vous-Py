@@ -7,7 +7,9 @@ class ServiceWorker {
     if (!navigator.serviceWorker) return;
     const serviceWorker = this;
 
-    navigator.serviceWorker.register('/static/rendezvous/sw.js').then(reg => {
+    navigator.serviceWorker.register('/static/rendezvous/sw.js', {
+      scope: '/'
+    }).then(reg => {
       if (!navigator.serviceWorker.controller) {
         return;
       }
