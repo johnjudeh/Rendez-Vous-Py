@@ -140,13 +140,19 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-# Adds the 'Service-Worker-Allowed' header so that the service
-# worker can have a scope of / regardless of the its path
-def allowServiceWorkerRootScope(headers, path, url):
+def addCustomHTTPHeaders(headers, path, url):
+
     if '/rendezvous/sw' in url:
+        # Adds the 'Service-Worker-Allowed' header so that the service
+        # worker can have a scope of / regardless of the its path
         headers['Service-Worker-Allowed'] = '/'
 
-WHITENOISE_ADD_HEADERS_FUNCTION = allowServiceWorkerRootScope
+    elif '/rendezvous/manifest' in url:
+        # The PWA manifest should be served with a content-type of
+        # application/manifest+json as per the specification
+        headers['Content-Type'] = 'application/manifest+json'
+
+WHITENOISE_ADD_HEADERS_FUNCTION = addCustomHTTPHeaders
 
 
 # Gulp build process setup
