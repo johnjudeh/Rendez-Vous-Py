@@ -41,7 +41,7 @@ Once the files have been downloaded, navigate into the applications root
 directory and install the python and node dependencies needed.
 
 ```bash
-cd Rendez-Vous
+cd Rendez-Vous-Py
 pip install -r requirements.txt
 npm install
 ```
